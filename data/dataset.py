@@ -21,9 +21,14 @@ class FaceLandmarksDataset(data.Dataset):
     landmarks = data["landmarks"]
 
     if self.transforms:
-      transformed = self.transforms(image=img, keypoints=landmarks)
-      img = transformed["image"]
-      landmarks = transformed["keypoints"]
+        transformed = self.transforms(image=img, keypoints=landmarks.tolist())
+        img = transformed["image"]
+        kps = transformed["keypoints"]
+
+        result = np.zeros((68, 2), dtype=np.float32)
+        for i, (x, y) in enumerate(kps[:68]):
+            result[i] = [x, y]
+        landmarks = result
 
     landmarks = torch.tensor(landmarks, dtype=torch.float32).view(-1)
 
