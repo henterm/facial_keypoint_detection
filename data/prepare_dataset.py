@@ -24,7 +24,7 @@ def load_pts(pts_path):
         x, y = map(float, line.split())
         points.append((x, y))
 
-    return np.array(points) if len(points) in (39, 68) else None
+    return np.array(points) if len(points) == 68 else None
   except:
     return None
   
