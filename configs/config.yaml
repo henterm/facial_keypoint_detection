@@ -1,0 +1,21 @@
+config = {
+    'model': {
+        'backbone': 'convnext_tiny',
+        'num_landmarks': 68,
+        'pretrained': True
+    },
+    'train': {
+        'epochs': 20,
+        'batch_size': 32,
+        'lr': 1e-3,
+        'weight_decay': 1e-5,
+        'num_workers': 2,
+        'grad_clip': 1.0,
+        'checkpoint': f'{DRIVE_DIR}/checkpoints/best_model.pth'
+    },
+    'dataset': {
+        'input_size': 112,
+        'test_size': 0.2,
+        'processed_dir': PROCESSED_DIR
+    }
+}
