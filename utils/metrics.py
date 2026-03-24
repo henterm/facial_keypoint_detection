@@ -9,6 +9,8 @@ def compute_nme(pred, gt):
     w = np.max(gt[:, 0]) - np.min(gt[:, 0])
     h = np.max(gt[:, 1]) - np.min(gt[:, 1])
     norm_factor = np.sqrt(w * h)
+    if norm_factor < 1e-6:
+        return None
     dist = np.sqrt(np.sum((pred - gt) ** 2, axis=1))
     return np.mean(dist) / norm_factor
 
