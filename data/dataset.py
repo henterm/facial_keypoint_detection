@@ -21,13 +21,16 @@ class FaceLandmarksDataset(data.Dataset):
     landmarks = data["landmarks"]
 
     if self.transforms:
-        transformed = self.transforms(image=img, keypoints=landmarks.tolist())
+        h, w = img.shape[:2]
+        kps_pixels = [(x * w, y * h) for x, y in landmarks]
+
+        transformed = self.transforms(image=img, keypoints=kps_pixels)
         img = transformed["image"]
         kps = transformed["keypoints"]
 
         result = np.zeros((68, 2), dtype=np.float32)
         for i, (x, y) in enumerate(kps[:68]):
-            result[i] = [x, y]
+            result[i] = [x / 112.0, y / 112.0]  # нормализуем обратно
         landmarks = result
 
     landmarks = torch.tensor(landmarks, dtype=torch.float32).view(-1)
