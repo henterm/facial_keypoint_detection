@@ -17,7 +17,7 @@ class WingLoss(nn.Module):
         y = flag * self.w * torch.log(1 + abs_diff / self.e) + (1 - flag) * (
             abs_diff - self.C
         )
-        return y.sum()
+        return y.mean()
 
 
 class AdaptiveWingLoss(nn.Module):
