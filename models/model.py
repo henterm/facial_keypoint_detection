@@ -8,7 +8,8 @@ class LandmarkModel(nn.Module):
     self.backbone = timm.create_model(
         backbone_name, 
         pretrained=pretrained, 
-        num_classes=0
+        num_classes=0,
+        global_pool='avg'
         )
     in_features = self.backbone.num_features
     self.head = nn.Linear(in_features, num_landmarks * 2)
