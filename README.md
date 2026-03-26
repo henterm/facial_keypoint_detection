@@ -7,7 +7,7 @@
 ---
 
 <div align="center">
-  <img src="pics/demo.gif" alt="demo" width="600">
+  <img src="pics/demo.png" alt="demo" width="900">
 </div>
 
 ---
@@ -153,7 +153,7 @@ facial_keypoint_detection/
 │   └── metrics.py            # NME, AUC, CED
 ├── configs/
 │   └── config.yaml
-├── pics/                     # demo.gif, CED plots, loss curves
+├── pics/                     # demo.png, CED plots, loss curves
 ├── train.py
 ├── inference.py
 ├── calculate_ced.py
