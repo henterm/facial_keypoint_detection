@@ -110,7 +110,7 @@ Then run:
 python train.py
 ```
 
-Pretrained weights: *coming soon*
+Pretrained weights: [download](https://drive.google.com/file/d/1yMqmdleb_RvdpUJvhJMlK8xQw_cZdT7A/view?usp=drive_link)
 
 ---
 
