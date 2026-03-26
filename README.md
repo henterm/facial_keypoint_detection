@@ -14,38 +14,36 @@
 
 ## Results
 
-### CED for Menpo dataset
+### Cumulative Error Distribution
 
 <p align="center">
-  <img src="pics/ced_menpo.png" width="800" alt="CED Menpo">
+  <img src="pics/ced_menpo.png" width="800" alt="CED comparison">
 </p>
 
-### CED for 300W dataset
-
-<p align="center">
-  <img src="pics/ced_300w.png" width="800" alt="CED 300W">
-</p>
+Our model (AUC=0.066) significantly outperforms the DLIB baseline (AUC=0.025).
 
 ### Quantitative comparison
 
-| Model | Backbone | Input | Mean NME ↓ | Median NME ↓ |
+| Model | Backbone | Input | Mean NME ↓ | AUC ↑ |
 |---|---|---|---|---|
-| **Ours** | ConvNeXt-Tiny | 112×112 | **0.0529** | **0.0270** |
-| DLIB baseline | HOG + SVM | — | *coming soon* | *coming soon* |
+| **Ours** | ConvNeXt-Tiny | 112×112 | **0.0487** | **0.066** |
+| DLIB baseline | HOG + SVM | — | 0.0597 | 0.025 |
 
-### Experiments
-
-| Backbone | Input | Epochs | Val Loss | Mean NME |
-|---|---|---|---|---|
-| ConvNeXt-Tiny | 112×112 | 40 | 0.0827 | 0.0529 |
-| ConvNeXt-Tiny | 224×224 | 40 | 0.0835 | 0.0535 |
-| MobileNetV3-Small | 112×112 | 40 | TBD | TBD |
+> Our model outperforms the DLIB baseline by **18%** on Mean NME.
 
 ### Training curves
 
 <p align="center">
   <img src="pics/loss_curve.png" width="800" alt="Training curves">
 </p>
+
+### Experiments
+
+| Backbone | Input | Epochs | Val Loss | Mean NME |
+|---|---|---|---|---|
+| **ConvNeXt-Tiny** | **112×112** | **100** | **0.0748** | **0.0487** |
+| ConvNeXt-Tiny | 224×224 | 40 | 0.0835 | 0.0535 |
+| MobileNetV3-Small | 112×112 | 40 | 0.0935 | 0.0636 |
 
 ---
 
@@ -99,9 +97,9 @@ model:
   pretrained: true
 
 train:
-  epochs: 40
+  epochs: 100
   batch_size: 32
-  lr: 0.001
+  lr: 0.0003
   weight_decay: 0.00001
   grad_clip: 1.0
 ```
@@ -129,8 +127,6 @@ python inference.py \
 ---
 
 ## CED calculation
-
-Generate predicted `.pts` files for the test set, then plot the CED curve:
 
 ```bash
 python calculate_ced.py \
